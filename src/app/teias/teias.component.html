@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-2">
+      <app-teias-sidebar class="sidebar"></app-teias-sidebar>
+    </div>
+    <div class="col-10 content-area">
+      <div class="wrapper" Resizable>
+        <p-accordion
+          expandIcon="pi pi-fw pi-plus"
+          collapseIcon="pi pi-fw pi-minus"
+          class="mb-2"
+        >
+          <p-accordionTab header="Arama Kriterleri">
+            <app-filter-menu></app-filter-menu>
+          </p-accordionTab>
+        </p-accordion>
+        <div class="resizable-div">
+          this is a text area
+          <div class="grabber"></div>
+        </div>
+        <div class="resizable-div flex-grow-1">this is a text area</div>
+      </div>
+    </div>
+  </div>
+</div>

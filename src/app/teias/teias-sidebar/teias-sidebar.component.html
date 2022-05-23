@@ -1,0 +1,9 @@
+<p-tree
+  [value]="sidebar"
+  [(selection)]="selectedFile"
+  selectionMode="single"
+  (onNodeSelect)="nodeSelect($event)"
+  (onNodeUnselect)="nodeUnselect($event)"
+  styleClass="custom-tree"
+>
+</p-tree>

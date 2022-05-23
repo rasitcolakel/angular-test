@@ -1,0 +1,50 @@
+.wrapper,
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.content-area {
+  height: 100%;
+  width: calc(100% / 12 * 10);
+  background-color: #f1f1f1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  overflow: auto;
+}
+.resizable-div {
+  min-height: 150px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  position: relative;
+}
+
+.grabber {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  margin-left: -15px;
+  cursor: row-resize;
+  height: 5px;
+  width: 100%;
+  border-top: 1px solid #f1f1f1;
+  overflow: hidden;
+  background-color: #eff0f1;
+  background-position: 210px -364px;
+  background-size: initial;
+  background-repeat: no-repeat;
+}
+.sidebar {
+  height: 100%;
+  width: calc(100% / 12 * 2);
+  background-color: #f1f1f1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+}

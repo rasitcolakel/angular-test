@@ -10,13 +10,32 @@ import { CountriesComponent } from './countries/countries.component';
 import { TabViewModule } from 'primeng/tabview';
 import { TableModule } from 'primeng/table';
 import { BinanceComponent } from './binance/binance.component';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { TeiasComponent } from './teias/teias.component';
+import { TeiasSidebarComponent } from './teias/teias-sidebar/teias-sidebar.component';
+import { TreeModule } from 'primeng/tree';
+import { NodeService } from './teias/teias-sidebar/nodeService';
+import { FilterMenuComponent } from './teias/filter-menu/filter-menu.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { AccordionModule } from 'primeng/accordion';
+import { Resizable } from './teias/resizable.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsComponent,
     CountriesComponent,
-    BinanceComponent
+    BinanceComponent,
+    TeiasComponent,
+    TeiasSidebarComponent,
+    FilterMenuComponent,
+    Resizable
   ],
   imports: [
     BrowserModule,
@@ -24,9 +43,19 @@ import { BinanceComponent } from './binance/binance.component';
     CardModule,
     HttpClientModule,
     TabViewModule,
-    TableModule
+    TableModule,
+    PanelMenuModule,
+    TreeModule,
+    DropdownModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MultiSelectModule,
+    InputTextModule,
+    ButtonModule,
+    RippleModule,
+    AccordionModule
   ],
-  providers: [],
+  providers: [NodeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,8 @@
+:host ::ng-deep .p-treenode,
+:host ::ng-deep .p-treenode-content {
+  padding: 0 !important;
+}
+
+:host ::ng-deep .p-tree {
+  height: 100%;
+}

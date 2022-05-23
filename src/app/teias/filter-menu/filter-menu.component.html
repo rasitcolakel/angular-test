@@ -1,0 +1,189 @@
+<div class="flex">
+  <div class="flex col-4 align-items-center flex-column align-content-between">
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">Bölge Müdürlüğü</span>
+      <p-multiSelect
+        [options]="mudurlukler"
+        [(ngModel)]="seciliMudurluk"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+        (onChange)="mudurlukSecildi()"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">İşletme Müdürlüğü</span>
+      <p-dropdown
+        [options]="isletmeler"
+        [(ngModel)]="seciliIsletme"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+      >
+      </p-dropdown>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">Yük Tevzi Müdürlüğü</span>
+      <p-multiSelect
+        [options]="yukTevzileri"
+        [(ngModel)]="seciliYukTevzi"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+        [maxSelectedLabels]="1"
+        [selectedItemsLabel]="'{0} seçenek seçildi'"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">Transformatör Merkezi Durumu</span>
+      <p-multiSelect
+        [options]="transformatorMerkezi"
+        [(ngModel)]="seciliTransformatorMerkezi"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+        [maxSelectedLabels]="1"
+        [selectedItemsLabel]="'{0} seçenek seçildi'"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">TM Scadalı Mı?</span>
+      <p-dropdown
+        [options]="tmScada"
+        [(ngModel)]="seciliTmScada"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+      >
+      </p-dropdown>
+    </div>
+  </div>
+  <div class="flex col-4 align-items-center flex-column align-content-between">
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">Transformatör Merkezi Tipi</span>
+      <p-multiSelect
+        [options]="transformatorMerkeziTipi"
+        [(ngModel)]="seciliTransformatorMerkeziTipi"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">Transformatör Merkezi Adı</span>
+      <input type="text" pInputText class="col-7" />
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">Mülkiyet</span>
+      <p-multiSelect
+        [options]="mulkiyet"
+        [(ngModel)]="seciliMulkiyet"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">TM İşletme Bakım Sorumluluğu</span>
+      <p-multiSelect
+        [options]="tmIsletme"
+        [(ngModel)]="seciliTmIsletme"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">RTU var mı?</span>
+      <p-dropdown
+        [options]="rtu"
+        [(ngModel)]="seciliRtu"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+      >
+      </p-dropdown>
+    </div>
+  </div>
+  <div class="flex col-4 align-items-center flex-column align-content-between">
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">İşletme Şekli</span>
+      <p-multiSelect
+        [options]="isletmeSekli"
+        [(ngModel)]="seciliIsletmeSekli"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+        [maxSelectedLabels]="1"
+        [selectedItemsLabel]="'{0} seçenek seçildi'"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">İşleten Firma</span>
+      <p-multiSelect
+        [options]="isletenFirma"
+        [(ngModel)]="seciliIsletenFirma"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+        [maxSelectedLabels]="1"
+        [selectedItemsLabel]="'{0} seçenek seçildi'"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">İl</span>
+      <p-multiSelect
+        [options]="il"
+        [(ngModel)]="seciliIl"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+        [maxSelectedLabels]="1"
+        [selectedItemsLabel]="'{0} seçenek seçildi'"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center">
+      <span class="section-text col-5">Maksimum Şalt Gerilimi</span>
+      <p-multiSelect
+        [options]="maksimumSalt"
+        [(ngModel)]="seciliMaksimumSalt"
+        optionLabel="name"
+        placeholder="Lütfen Seçiniz"
+        class="form-item"
+        optionValue="id"
+        [maxSelectedLabels]="1"
+        [selectedItemsLabel]="'{0} seçenek seçildi'"
+      >
+      </p-multiSelect>
+    </div>
+    <div class="flex col-12 align-items-center justify-content-end">
+      <p-button
+        label="Filtrele"
+        pRipple
+        icon="pi pi-search"
+        styleClass="p-button-lg"
+      ></p-button>
+    </div>
+  </div>
+</div>
