@@ -24,7 +24,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { AccordionModule } from 'primeng/accordion';
-import { Resizable } from './teias/resizable.directive';
+import { AnaTabloService } from './teias/anaTabloService';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,7 @@ import { Resizable } from './teias/resizable.directive';
     BinanceComponent,
     TeiasComponent,
     TeiasSidebarComponent,
-    FilterMenuComponent,
-    Resizable
+    FilterMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +54,7 @@ import { Resizable } from './teias/resizable.directive';
     RippleModule,
     AccordionModule
   ],
-  providers: [NodeService],
+  providers: [NodeService, AnaTabloService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

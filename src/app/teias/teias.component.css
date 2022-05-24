@@ -18,9 +18,8 @@ body {
   overflow: auto;
 }
 .resizable-div {
-  min-height: 150px;
+  min-height: 50px;
   border: 1px solid #ddd;
-  padding: 15px;
   position: relative;
 }
 
@@ -47,4 +46,15 @@ body {
   top: 0;
   left: 0;
   overflow: auto;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td,
+:host
+  ::ng-deep
+  .p-datatable.p-datatable-gridlines
+  .p-datatable-thead
+  > tr
+  > th {
+  padding: 0.6rem 0.7rem;
+  font-size: 0.9rem;
 }

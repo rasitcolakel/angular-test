@@ -21,7 +21,6 @@ export class TeiasSidebarComponent implements OnInit {
       if (envanter) {
         this.selectedFile = envanter;
       }
-
     }
     );
   }
