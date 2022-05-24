@@ -16,6 +16,7 @@ import { AnaTabloService } from './anaTabloService';
 })
 export class TeiasComponent implements OnInit {
   anaTablo: AnaTablo[] = [];
+  seciliAnaTablo!: AnaTablo;
   anaTabloColumns: any[] = anaTablo;
   gridTabloTabler: any[] = gridTabloTabler;
   height = 250;
@@ -73,5 +74,13 @@ export class TeiasComponent implements OnInit {
       this.height = part.offsetHeight;
       this.setHeightAsString();
     }, 300);
+  }
+
+  anaTabloSec(event: any) {
+    this.seciliAnaTablo = event.data;
+    console.log('anaTabloSec', this.seciliAnaTablo, event);
+  }
+  anaTabloSecimIptal() {
+    // this.seciliAnaTablo = undefined;
   }
 }

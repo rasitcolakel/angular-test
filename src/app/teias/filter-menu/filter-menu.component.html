@@ -1,6 +1,6 @@
 <div class="flex">
   <div class="flex col-4 align-items-center flex-column align-content-between">
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">Bölge Müdürlüğü</span>
       <p-multiSelect
         [options]="mudurlukler"
@@ -13,7 +13,7 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">İşletme Müdürlüğü</span>
       <p-dropdown
         [options]="isletmeler"
@@ -25,7 +25,7 @@
       >
       </p-dropdown>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">Yük Tevzi Müdürlüğü</span>
       <p-multiSelect
         [options]="yukTevzileri"
@@ -39,7 +39,7 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">Transformatör Merkezi Durumu</span>
       <p-multiSelect
         [options]="transformatorMerkezi"
@@ -53,7 +53,7 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">TM Scadalı Mı?</span>
       <p-dropdown
         [options]="tmScada"
@@ -67,7 +67,7 @@
     </div>
   </div>
   <div class="flex col-4 align-items-center flex-column align-content-between">
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">Transformatör Merkezi Tipi</span>
       <p-multiSelect
         [options]="transformatorMerkeziTipi"
@@ -79,11 +79,11 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">Transformatör Merkezi Adı</span>
       <input type="text" pInputText class="col-7" />
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">Mülkiyet</span>
       <p-multiSelect
         [options]="mulkiyet"
@@ -95,7 +95,7 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">TM İşletme Bakım Sorumluluğu</span>
       <p-multiSelect
         [options]="tmIsletme"
@@ -107,7 +107,7 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">RTU var mı?</span>
       <p-dropdown
         [options]="rtu"
@@ -121,7 +121,7 @@
     </div>
   </div>
   <div class="flex col-4 align-items-center flex-column align-content-between">
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">İşletme Şekli</span>
       <p-multiSelect
         [options]="isletmeSekli"
@@ -135,7 +135,7 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">İşleten Firma</span>
       <p-multiSelect
         [options]="isletenFirma"
@@ -149,7 +149,7 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">İl</span>
       <p-multiSelect
         [options]="il"
@@ -163,7 +163,7 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center">
+    <div class="flex col-12 align-items-center form-container">
       <span class="section-text col-5">Maksimum Şalt Gerilimi</span>
       <p-multiSelect
         [options]="maksimumSalt"
@@ -177,7 +177,9 @@
       >
       </p-multiSelect>
     </div>
-    <div class="flex col-12 align-items-center justify-content-end">
+    <div
+      class="flex col-12 align-items-center form-container justify-content-end"
+    >
       <p-button
         label="Filtrele"
         pRipple

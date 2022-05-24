@@ -1,98 +1,45 @@
 {
     "data": [
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Marka-Model Ekleme"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
-            "label": "Primer Envanter Marka-Model Ekleme"
-        },
-        {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
-            "label": "Sekonder Envanter Marka-Model Ekleme"
-        },
-        {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
-            "label": "Elektronik Envanter Marka-Model Ekleme"
-        },
-        {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
-            "label": "Ölçü Envanter Marka-Model Ekleme"
-        },
-        {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
-            "label": "Test Ölçüm Cihaz Marka Model Ekle"
-        },
-        {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Arıza Analiz"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "EİH Arıza Analiz Girişi"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Transformatör Arıza Analiz Girişi"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "EİH Kök Neden Listesi"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Transformatör Kök Neden Listesi"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "EİH Kök Arıza Analiz Grafik"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Bakım Raporları"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Bakım Yeni"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Bölge Müdürlük Hedefleri"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "BYTM Kumanda"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Durum - Bakım Listesi"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Envanter Bakım Tanımları"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Envanter Kayıt",
             "expanded": true,
             "children": [
@@ -123,68 +70,42 @@
             ]
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Genel Raporlar"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Hat Bakım Tanımları"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "İş Emri"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "İş Yükü Analiz"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Kalibrasyon / Doğrulama İşlemleri"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Olay Bildirimleri"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Olayları Birimlerle Paylaş"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Talimat Verme"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Teçhizat Raporları"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "TEİAŞ Arıza Hedef"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Test İşlemleri"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Yağ ve Gaz Analizi"
         },
         {
-            "expandedIcon": "pi pi-folder-open",
-            "collapsedIcon": "pi pi-folder",
             "label": "Geri Bildirim"
         }
     ]

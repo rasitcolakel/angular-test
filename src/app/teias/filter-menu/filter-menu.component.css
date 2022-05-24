@@ -1,10 +1,16 @@
 .section-text {
   font-size: 1em;
   font-weight: bold;
+  padding: 0 !important;
 }
 .form-item {
   flex: 0 0 auto;
   width: 58.3333% !important;
+  padding: 0 !important;
+}
+.form-container {
+  padding: 0 !important;
+  margin-bottom: 0.2em;
 }
 :host ::ng-deep .p-multiselect,
 :host ::ng-deep .p-dropdown {

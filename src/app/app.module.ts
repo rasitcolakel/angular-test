@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardModule } from 'primeng/card';
@@ -25,6 +24,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { AccordionModule } from 'primeng/accordion';
 import { AnaTabloService } from './teias/anaTabloService';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { AnaTabloService } from './teias/anaTabloService';
     BinanceComponent,
     TeiasComponent,
     TeiasSidebarComponent,
-    FilterMenuComponent
+    FilterMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,9 +52,10 @@ import { AnaTabloService } from './teias/anaTabloService';
     InputTextModule,
     ButtonModule,
     RippleModule,
-    AccordionModule
+    AccordionModule,
+    PaginatorModule,
   ],
   providers: [NodeService, AnaTabloService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
