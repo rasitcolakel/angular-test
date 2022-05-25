@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   ilArray,
   isletenFirmaArray,
@@ -10,6 +10,7 @@ import {
   transformatorMerkeziTipiArray,
   yukTevziArray,
 } from '../../../assets/arrays';
+import { AnaTabloService } from '../anaTabloService';
 interface Model {
   id: number;
   name: string;
@@ -20,8 +21,7 @@ interface Model {
   styleUrls: ['./filter-menu.component.css'],
 })
 export class FilterMenuComponent implements OnInit {
-  @Input()
-  onFilterPressed!: (args: any) => void;
+  @Output() onFilterPressed: EventEmitter<any> = new EventEmitter();
   mudurlukler!: Model[];
   seciliMudurluk: Model[] | undefined;
   isletmeler!: Model[];
@@ -48,7 +48,7 @@ export class FilterMenuComponent implements OnInit {
   seciliIl: Model[] | undefined;
   maksimumSalt!: Model[];
   seciliMaksimumSalt: Model[] | undefined;
-  constructor() {}
+  constructor(anaTabloService: AnaTabloService) {}
 
   ngOnInit(): void {
     this.mudurlukler = this.addIDToArray(mudurlukArray);
@@ -78,9 +78,9 @@ export class FilterMenuComponent implements OnInit {
   }
   mudurlukSecildi() {}
 
-  filtrele() {
+  filtrele(): void {
     console.log('filtele calisti');
-    this.onFilterPressed({
+    this.onFilterPressed.emit({
       seciliMudurluk: this.seciliMudurluk,
       seciliIsletme: this.seciliIsletme,
       seciliYukTevzi: this.seciliYukTevzi,

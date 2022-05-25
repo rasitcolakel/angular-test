@@ -14,7 +14,7 @@
         >
           <p-accordionTab header="Arama Kriterleri" [selected]="true">
             <app-filter-menu
-              [onFilterPressed]="onFilterPressed"
+              (onFilterPressed)="filterData($event)"
             ></app-filter-menu>
           </p-accordionTab>
         </p-accordion>

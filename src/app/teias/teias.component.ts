@@ -35,8 +35,12 @@ export class TeiasComponent implements OnInit {
     private renderer: Renderer2
   ) {}
   ngOnInit(): void {
-    this.anaTabloService.getAnaTablo().then((data) => (this.anaTablo = data));
-    this.anaTabloService.getAltTablo().then((data) => (this.altTablo = data));
+    this.anaTabloService
+      .getAnaTablo({})
+      .then((data: any) => (this.anaTablo = data.data));
+    this.anaTabloService
+      .getAltTablo({})
+      .then((data: any) => (this.altTablo = data.data));
     this.setHeightAsString();
   }
 
@@ -106,7 +110,9 @@ export class TeiasComponent implements OnInit {
   altTabloSecimIptal() {
     // this.seciliAnaTablo = undefined;
   }
-  onFilterPressed(event: any) {
-    console.log('onFilterPressed', event);
+  filterData(event: any) {
+    this.anaTabloService.getAnaTablo(event).then((data: any) => {
+      console.log('data', data);
+    });
   }
 }

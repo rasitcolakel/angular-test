@@ -10,22 +10,27 @@ export const anaTablo = [
   {
     key: 'lkp_bolge_mudurluk_qw_',
     name: 'Bölge Müdürlüğü',
+    ref: 'seciliMudurluk',
   },
   {
     key: 'lkp_isletme_mudurluk_qw_',
     name: 'İşletme Müdürlüğü',
+    ref: 'seciliIsletme',
   },
   {
     key: 'lkp_sorumlu_ytm_qw_',
     name: 'Yük Tevzi Müdürlüğü',
+    ref: 'seciliYukTevzi',
   },
   {
     key: 'lkp_tm_durum_qw_',
     name: 'Transformatör Merkezi Durumu',
+    ref: 'seciliTransformatorMerkezi',
   },
   {
     key: 'lkp_trafo_merkezi_tip_qw_',
     name: 'Transformatör Merkezi Tipi',
+    ref: 'seciliTransformatorMerkeziTipi',
   },
   {
     key: 'trafo_merkez_ad',
@@ -38,26 +43,32 @@ export const anaTablo = [
   {
     key: 'lkp_tm_scada_durum',
     name: 'TM Scadalı Mı?',
+    ref: 'seciliTmScada',
   },
   {
     key: 'lkp_mulkiyet_qw_',
     name: 'Mülkiyet',
+    ref: 'seciliMulkiyet',
   },
   {
     key: 'lkp_sorumluluk_qw_',
     name: 'TM İşletme Bakım Sorumluluğu',
+    ref: 'seciliTmIsletme',
   },
   {
     key: 'lkp_isletme_sekli_qw_',
     name: 'İşletme Şekli',
+    ref: 'seciliIsletmeSekli',
   },
   {
     key: 'lkp_isleten_firma_qw_',
     name: 'İşleten Firma',
+    ref: 'seciliIsletenFirma',
   },
   {
     key: 'lkp_il_qw_',
     name: 'İl',
+    ref: 'seciliIl',
   },
   {
     key: 'lkp_ilce_qw_',
