@@ -13,7 +13,9 @@
           (onClose)="accordionMovement($event)"
         >
           <p-accordionTab header="Arama Kriterleri" [selected]="true">
-            <app-filter-menu></app-filter-menu>
+            <app-filter-menu
+              [onFilterPressed]="onFilterPressed"
+            ></app-filter-menu>
           </p-accordionTab>
         </p-accordion>
         <div class="anatablo-container flex-grow-1">

@@ -106,4 +106,7 @@ export class TeiasComponent implements OnInit {
   altTabloSecimIptal() {
     // this.seciliAnaTablo = undefined;
   }
+  onFilterPressed(event: any) {
+    console.log('onFilterPressed', event);
+  }
 }

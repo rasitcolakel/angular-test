@@ -1,5 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ilArray, isletenFirmaArray, isletmeArray, maksimumSaltArray, mudurlukArray, mulkiyetArray, transformatorMerkeziArray, transformatorMerkeziTipiArray, yukTevziArray } from "../../../assets/arrays"
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  ilArray,
+  isletenFirmaArray,
+  isletmeArray,
+  maksimumSaltArray,
+  mudurlukArray,
+  mulkiyetArray,
+  transformatorMerkeziArray,
+  transformatorMerkeziTipiArray,
+  yukTevziArray,
+} from '../../../assets/arrays';
 interface Model {
   id: number;
   name: string;
@@ -10,6 +20,8 @@ interface Model {
   styleUrls: ['./filter-menu.component.css'],
 })
 export class FilterMenuComponent implements OnInit {
+  @Input()
+  onFilterPressed!: (args: any) => void;
   mudurlukler!: Model[];
   seciliMudurluk: Model[] | undefined;
   isletmeler!: Model[];
@@ -36,10 +48,9 @@ export class FilterMenuComponent implements OnInit {
   seciliIl: Model[] | undefined;
   maksimumSalt!: Model[];
   seciliMaksimumSalt: Model[] | undefined;
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-
     this.mudurlukler = this.addIDToArray(mudurlukArray);
     this.isletmeler = this.addIDToArray(isletmeArray);
     this.yukTevzileri = this.addIDToArray(yukTevziArray);
@@ -65,5 +76,24 @@ export class FilterMenuComponent implements OnInit {
       };
     });
   }
-  mudurlukSecildi() { }
+  mudurlukSecildi() {}
+
+  filtrele() {
+    console.log('filtele calisti');
+    this.onFilterPressed({
+      seciliMudurluk: this.seciliMudurluk,
+      seciliIsletme: this.seciliIsletme,
+      seciliYukTevzi: this.seciliYukTevzi,
+      seciliTransformatorMerkezi: this.seciliTransformatorMerkezi,
+      seciliTmScada: this.seciliTmScada,
+      seciliTransformatorMerkeziTipi: this.seciliTransformatorMerkeziTipi,
+      seciliMulkiyet: this.seciliMulkiyet,
+      seciliTmIsletme: this.seciliTmIsletme,
+      seciliRtu: this.seciliRtu,
+      seciliIsletmeSekli: this.seciliIsletmeSekli,
+      seciliIsletenFirma: this.seciliIsletenFirma,
+      seciliIl: this.seciliIl,
+      seciliMaksimumSalt: this.seciliMaksimumSalt,
+    });
+  }
 }
