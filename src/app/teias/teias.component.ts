@@ -5,7 +5,8 @@ import {
   OnInit,
   Renderer2,
 } from '@angular/core';
-import { anaTablo, gridTabloTabler } from 'src/assets/arrays';
+import { anaTablo, gridTabloTabler, altTablo } from 'src/assets/arrays';
+import { AltTablo } from './altTablo';
 import { AnaTablo } from './anaTablo';
 import { AnaTabloService } from './anaTabloService';
 
@@ -19,11 +20,15 @@ export class TeiasComponent implements OnInit {
   seciliAnaTablo!: AnaTablo;
   anaTabloColumns: any[] = anaTablo;
   gridTabloTabler: any[] = gridTabloTabler;
-  height = 250;
-  heightString = this.height + 'px';
+  height = 150;
+  heightAnaTablo = this.height + 'px';
+  heightAltTablo = this.height + 'px';
   y = 100;
   oldY = 0;
   grabber = false;
+  altTablo: AltTablo[] = [];
+  seciliAltTablo!: AltTablo;
+  altTabloColumns: any[] = altTablo;
   constructor(
     private anaTabloService: AnaTabloService,
     private el: ElementRef,
@@ -31,18 +36,15 @@ export class TeiasComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.anaTabloService.getAnaTablo().then((data) => (this.anaTablo = data));
+    this.anaTabloService.getAltTablo().then((data) => (this.altTablo = data));
+    this.setHeightAsString();
   }
 
   @HostListener('document:mouseup', ['$event'])
   onMouseUp(event: MouseEvent) {
     if (!this.grabber) return;
-    let part = this.el.nativeElement.querySelector('.resizable-div');
-    this.height = part.offsetHeight;
-    this.resizer(event.clientY - this.oldY);
-    this.oldY = event.clientY;
-    this.renderer.setStyle(part, 'height', this.height);
-    this.setHeightAsString();
-    this.grabber = false;
+    let newHeight = event.clientY - this.oldY;
+    this.resizer(newHeight);
   }
 
   resizer(offsetY: number) {
@@ -50,6 +52,7 @@ export class TeiasComponent implements OnInit {
     this.setHeightAsString();
     let body = this.el.nativeElement.querySelector('.content-area');
     this.renderer.setStyle(body, 'user-select', 'auto');
+    this.grabber = false;
   }
 
   @HostListener('document:mousedown', ['$event'])
@@ -64,23 +67,43 @@ export class TeiasComponent implements OnInit {
 
   setHeightAsString() {
     setTimeout(() => {
-      this.heightString = this.height - 30 + 'px';
+      let container = this.el.nativeElement.querySelector(
+        '.anatablo-container'
+      ).offsetHeight;
+      let anaTabloUst =
+        this.el.nativeElement.querySelector('.anatablo-ust').offsetHeight;
+      let altTabloTabler =
+        this.el.nativeElement.querySelector('.alt-tablo-tabler').offsetHeight;
+      let altTabloTable =
+        this.el.nativeElement.querySelector('.alt-tablo-table').offsetHeight;
+      this.heightAltTablo =
+        container -
+        anaTabloUst -
+        this.height -
+        (altTabloTabler - altTabloTable) -
+        5 +
+        'px';
+      this.heightAnaTablo = this.height + 'px';
     }, 1);
   }
 
-  accordionOpen(event: any) {
+  accordionMovement(event: any) {
     setTimeout(() => {
-      let part = this.el.nativeElement.querySelector('.resizable-div');
-      this.height = part.offsetHeight;
       this.setHeightAsString();
-    }, 300);
+    }, 500);
   }
 
   anaTabloSec(event: any) {
     this.seciliAnaTablo = event.data;
-    console.log('anaTabloSec', this.seciliAnaTablo, event);
   }
   anaTabloSecimIptal() {
+    // this.seciliAnaTablo = undefined;
+  }
+
+  altTabloSec(event: any) {
+    this.seciliAltTablo = event.data;
+  }
+  altTabloSecimIptal() {
     // this.seciliAnaTablo = undefined;
   }
 }

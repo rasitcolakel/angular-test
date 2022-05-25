@@ -157,6 +157,105 @@ export const anaTablo = [
   },
 ];
 
+export const altTablo = [
+  {
+    name: 'Şalt ID',
+    key: 'salt_id',
+  },
+  {
+    name: 'Bölge Müdürlüğü',
+    key: 'lkp_bolge_mudurluk_qw_',
+  },
+  {
+    name: 'İşletme Müdürlüğü',
+    key: 'lkp_isletme_mudurluk_qw_',
+  },
+  {
+    name: 'İşletme Bakım Sorumluluğu',
+    key: 'lkp_isletme_bakim_sorumluk_qw_',
+  },
+  {
+    name: 'Transformatör Merkezi Durumu',
+    key: 'lkp_tm_durum_qw_',
+  },
+  {
+    name: 'Transformatör Merkezi',
+    key: 'trafo_merkezi_id_qw_',
+  },
+  {
+    name: 'Şalt Tipi',
+    key: 'lkp_salt_tip_qw_',
+  },
+  {
+    name: 'Sistem Nominal Gerilimi(kV)',
+    key: 'gerilim',
+  },
+  {
+    name: 'Şalt Adı',
+    key: 'salt_ad',
+  },
+  {
+    name: 'Bara Sistemi',
+    key: 'gerilimli_bara_sistem',
+  },
+  {
+    name: 'Şalt Durum',
+    key: 'lkp_salt_durum_qw_',
+  },
+  {
+    name: 'Fider Sayısı',
+    key: 'fider_sayi',
+  },
+  {
+    name: 'Kapalı Şalt Tipi',
+    key: 'lkp_kapali_salt_tip_qw_',
+  },
+  {
+    name: 'Marka',
+    key: 'marka_qw_',
+  },
+  {
+    name: 'Model',
+    key: 'model',
+  },
+  {
+    name: 'İmal Yılı',
+    key: 'imal_year',
+  },
+  {
+    name: 'Römork Plakası',
+    key: 'kumanda_seri_no',
+  },
+  {
+    name: 'Kumanda Seri Numarası',
+    key: 'romark_plaka',
+  },
+  {
+    name: 'Yedek Transformatör Cebi Adedi',
+    key: 'yedek_trafo_cebi_adet',
+  },
+  {
+    name: 'Donanımsız Fider Yeri Sayısı',
+    key: 'donanimsiz_fider_yeri_sayi',
+  },
+  {
+    name: 'Kayıt Tarihi',
+    key: 'insert_dttm',
+  },
+  {
+    name: 'Kaydeden',
+    key: 'insert_user_id_qw_',
+  },
+  {
+    name: 'Son Düzenleme Tarihi',
+    key: 'version_dttm',
+  },
+  {
+    name: 'Son Düzenleyen',
+    key: 'version_user_id_qw_',
+  },
+];
+
 export const gridTabloTabler = [
   'Şalt',
   'Bara',
