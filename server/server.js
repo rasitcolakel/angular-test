@@ -1,6 +1,5 @@
 const jsonServer = require("json-server");
 const server = jsonServer.create();
-const router = jsonServer.router("server/db.json");
 const middlewares = jsonServer.defaults();
 const anaDb = require("../src/assets/anaTablo.json");
 const altDb = require("../src/assets/altTablo.json");
@@ -16,7 +15,6 @@ server.post("/alt", (req, res, next) => {
   res.status(200).jsonp(altDb);
 });
 
-server.use(router);
 server.listen(4201, () => {
   console.log("JSON Server is running");
 });
