@@ -8,7 +8,7 @@ export class AnaTabloService {
   async getAnaTablo(params: any) {
     console.log('getAnaTablo', params);
     const res = await this.http
-      .post('http://localhost:4201/ana', {
+      .post('https://angular-demo-json.herokuapp.com/ana', {
         ...params,
       })
       .toPromise();
@@ -16,7 +16,7 @@ export class AnaTabloService {
   }
   async getAltTablo(params: any) {
     const res = await this.http
-      .post('http://localhost:4201/alt', params)
+      .post('https://angular-demo-json.herokuapp.com/alt', params)
       .toPromise();
     return res;
   }
