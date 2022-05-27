@@ -48,6 +48,12 @@ body {
   overflow: auto;
 }
 
+.sidebar-mobile {
+  height: 100%;
+  width: auto !important;
+  border: none;
+}
+
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td,
 :host
   ::ng-deep
@@ -57,4 +63,10 @@ body {
   > th {
   padding: 0.6rem 0.7rem;
   font-size: 0.9rem;
+}
+
+.alt-tablo-tabler {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }

@@ -26,6 +26,9 @@ import { AccordionModule } from 'primeng/accordion';
 import { AnaTabloService } from './teias/anaTabloService';
 import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
+import { SidebarModule } from 'primeng/sidebar';
+import { SplitterModule } from 'primeng/splitter';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { SkeletonModule } from 'primeng/skeleton';
     AccordionModule,
     PaginatorModule,
     SkeletonModule,
+    SidebarModule,
+    SplitterModule,
+    ToolbarModule,
   ],
   providers: [NodeService, AnaTabloService],
   bootstrap: [AppComponent],

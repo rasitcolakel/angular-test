@@ -79,7 +79,6 @@ export class FilterMenuComponent implements OnInit {
   mudurlukSecildi() {}
 
   filtrele(): void {
-    console.log('filtele calisti');
     this.onFilterPressed.emit({
       seciliMudurluk: this.seciliMudurluk,
       seciliIsletme: this.seciliIsletme,
