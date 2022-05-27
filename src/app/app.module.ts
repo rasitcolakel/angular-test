@@ -25,6 +25,7 @@ import { RippleModule } from 'primeng/ripple';
 import { AccordionModule } from 'primeng/accordion';
 import { AnaTabloService } from './teias/anaTabloService';
 import { PaginatorModule } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { PaginatorModule } from 'primeng/paginator';
     RippleModule,
     AccordionModule,
     PaginatorModule,
+    SkeletonModule,
   ],
   providers: [NodeService, AnaTabloService],
   bootstrap: [AppComponent],

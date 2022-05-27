@@ -4,7 +4,9 @@ import {
   HostListener,
   OnInit,
   Renderer2,
+  ViewChild,
 } from '@angular/core';
+import { Paginator } from 'primeng/paginator';
 import { anaTablo, gridTabloTabler, altTablo } from 'src/assets/arrays';
 import { AltTablo } from './altTablo';
 import { AnaTablo } from './anaTablo';
@@ -17,6 +19,10 @@ import { AnaTabloService } from './anaTabloService';
 })
 export class TeiasComponent implements OnInit {
   anaTablo: AnaTablo[] = [];
+  anaTabloLoading: boolean = true;
+  anaTabloPage: number = 0;
+  anaTabloRows: number = 0;
+  filterElements: any;
   seciliAnaTablo!: AnaTablo;
   anaTabloColumns: any[] = anaTablo;
   gridTabloTabler: any[] = gridTabloTabler;
@@ -29,19 +35,37 @@ export class TeiasComponent implements OnInit {
   altTablo: AltTablo[] = [];
   seciliAltTablo!: AltTablo;
   altTabloColumns: any[] = altTablo;
+  @ViewChild('paginator', { static: true })
+  paginator!: Paginator;
+
   constructor(
     private anaTabloService: AnaTabloService,
     private el: ElementRef,
     private renderer: Renderer2
   ) {}
   ngOnInit(): void {
-    this.anaTabloService
-      .getAnaTablo({})
-      .then((data: any) => (this.anaTablo = data.data));
+    this.filterAnaTablo();
     this.anaTabloService
       .getAltTablo({})
       .then((data: any) => (this.altTablo = data.data));
     this.setHeightAsString();
+  }
+
+  filterAnaTablo(event?: any) {
+    this.anaTabloLoading = true;
+    this.anaTabloService
+      .getAnaTablo({
+        ...this.filterElements,
+        page: this.anaTabloPage,
+        ...event,
+      })
+      .then((data: any) => {
+        setTimeout(() => {
+          this.anaTabloRows = data.total;
+          this.anaTablo = data.data;
+          this.anaTabloLoading = false;
+        }, 150);
+      });
   }
 
   @HostListener('document:mouseup', ['$event'])
@@ -111,8 +135,28 @@ export class TeiasComponent implements OnInit {
     // this.seciliAnaTablo = undefined;
   }
   filterData(event: any) {
-    this.anaTabloService.getAnaTablo(event).then((data: any) => {
-      console.log('data', data);
-    });
+    this.filterElements = event;
+    this.filterAnaTablo();
+    this.paginator.changePage(0);
+  }
+  onAnaTabloPageChange(event: any) {
+    this.anaTabloPage = event.page;
+    this.filterAnaTablo();
+  }
+  anaTabloLazyLoad(event: any) {
+    console.log('onLayLoadAnaTablo', event);
+    this.anaTabloService
+      .getAnaTablo({
+        ...this.filterElements,
+        page: this.anaTabloPage,
+      })
+      .then((data: any) => {
+        setTimeout(() => {
+          this.anaTabloRows = data.total;
+          this.anaTablo = data.data;
+          this.anaTablo = [...this.anaTablo];
+          this.anaTabloLoading = false;
+        }, 150);
+      });
   }
 }
