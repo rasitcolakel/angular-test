@@ -1,26 +1,38 @@
 <div class="container">
-  <div class="grid h-screen">
+  <p-toolbar>
+    <div class="flex align-items-center">
+      <img src="assets/logo.png" alt="logo" />
+      <p-button
+        icon="pi pi-bars"
+        class="p-mr-2 pl-2 p-button-outlined"
+        (onClick)="visibleSidebar = !visibleSidebar"
+        *ngIf="mobile"
+      ></p-button>
+    </div>
+  </p-toolbar>
+  <div *ngIf="mobile">
+    <p-sidebar [(visible)]="visibleSidebar">
+      <app-teias-sidebar class="sidebar flex"></app-teias-sidebar>
+    </p-sidebar>
+  </div>
+  <div class="grid h-screen m-0">
     <div
-      class="col-2"
+      class="flex flex-column"
+      [ngClass]="!mobile && visibleSidebar ? ' col-2' : ''"
       *ngIf="!mobile"
-      [hidden]="!mobile ? !visibleSidebar : true"
     >
-      <app-teias-sidebar class="sidebar"></app-teias-sidebar>
+      <p-button
+        type="button"
+        [icon]="!visibleSidebar ? 'pi pi-chevron-right' : 'pi pi-chevron-left'"
+        class="p-0 m-0 align-self-end ml-2"
+        (onClick)="visibleSidebar = !visibleSidebar"
+      ></p-button>
+      <app-teias-sidebar
+        class="sidebar"
+        *ngIf="!mobile && visibleSidebar"
+      ></app-teias-sidebar>
     </div>
     <div class="col-10 flex flex-column flex-grow-1 h-full">
-      <div *ngIf="mobile">
-        <p-sidebar [(visible)]="visibleSidebar" [showCloseIcon]="false">
-          <app-teias-sidebar class="sidebar sidebar-mobile"></app-teias-sidebar>
-        </p-sidebar>
-      </div>
-      <p-toolbar>
-        <p-button
-          icon="pi pi-bars"
-          class="p-mr-2"
-          visibleSidebar="visibleSidebar"
-          (onClick)="visibleSidebar = !visibleSidebar"
-        ></p-button>
-      </p-toolbar>
       <p-accordion
         expandIcon="pi pi-fw pi-plus"
         collapseIcon="pi pi-fw pi-minus"
@@ -37,17 +49,19 @@
           ></app-filter-menu>
         </p-accordionTab>
       </p-accordion>
-      <p-paginator
-        [hidden]="isVirtualScroll"
-        [rows]="25"
-        _page="2"
-        [slot]="13"
-        [totalRecords]="anaTabloRows"
-        [showJumpToPageDropdown]="true"
-        [showPageLinks]="false"
-        (onPageChange)="onAnaTabloPageChange($event)"
-        #paginator
-      ></p-paginator>
+      <div class="flex">
+        <p-paginator
+          [hidden]="isVirtualScroll"
+          [rows]="25"
+          _page="2"
+          [slot]="13"
+          [totalRecords]="anaTabloRows"
+          [showJumpToPageDropdown]="true"
+          [showPageLinks]="false"
+          (onPageChange)="onAnaTabloPageChange($event)"
+          #paginator
+        ></p-paginator>
+      </div>
       <p-splitter
         [style]="{ height: '100%' }"
         layout="vertical"

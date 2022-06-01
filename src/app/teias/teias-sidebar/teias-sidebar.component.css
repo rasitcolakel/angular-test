@@ -3,6 +3,23 @@
   padding: 0 !important;
 }
 
-:host ::ng-deep .p-tree {
-  height: 100%;
+:host
+  ::ng-deep
+  .p-tree
+  .p-tree-container
+  .p-treenode
+  .p-treenode-content
+  .p-tree-toggler {
+  width: 2em;
+  height: 1.7em;
+  padding-left: 0.5em;
+}
+
+:host
+  ::ng-deep
+  .p-tree
+  .p-tree-container
+  .p-treenode
+  .p-treenode-content.p-highlight {
+  background-color: var(--tedas-orange);
 }
