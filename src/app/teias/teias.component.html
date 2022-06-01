@@ -38,6 +38,7 @@
         </p-accordionTab>
       </p-accordion>
       <p-paginator
+        [hidden]="isVirtualScroll"
         [rows]="25"
         _page="2"
         [slot]="13"
@@ -55,19 +56,23 @@
         #splitter
       >
         <ng-template pTemplate>
-          <div class="card overflow-auto">
+          <div class="overflow-auto">
             <p-table
-              [value]="anaTablo"
+              [value]="isVirtualScroll ? anaTabloVirtual : anaTablo"
               [scrollable]="true"
               [scrollHeight]="heightAnaTablo"
               [resizableColumns]="true"
-              styleClass="p-datatable-gridlines"
+              styleClass="p-datatable-gridlines "
               selectionMode="single"
               [(selection)]="seciliAnaTablo"
               (onRowSelect)="anaTabloSec($event)"
               (onRowUnselect)="anaTabloSecimIptal()"
               [lazy]="true"
               [loading]="anaTabloLoading"
+              [virtualScroll]="isVirtualScroll"
+              [rows]="isVirtualScroll ? 50 : 25"
+              (onLazyLoad)="anaTabloLazyLoad($event)"
+              [columns]="anaTabloColumns"
             >
               <ng-template pTemplate="header">
                 <tr>

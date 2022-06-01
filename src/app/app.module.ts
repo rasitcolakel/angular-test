@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardModule } from 'primeng/card';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,6 +29,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { SidebarModule } from 'primeng/sidebar';
 import { SplitterModule } from 'primeng/splitter';
 import { ToolbarModule } from 'primeng/toolbar';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { TeiasVirtualComponent } from './teias-virtual/teias-virtual.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     TeiasComponent,
     TeiasSidebarComponent,
     FilterMenuComponent,
+    routingComponents,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     SplitterModule,
     ToolbarModule,
   ],
-  providers: [NodeService, AnaTabloService],
+  providers: [NodeService, AnaTabloService, CdkVirtualScrollViewport],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

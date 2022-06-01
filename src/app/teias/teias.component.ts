@@ -1,25 +1,23 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { LazyLoadEvent } from 'primeng/api';
 import { Paginator } from 'primeng/paginator';
 import { Splitter } from 'primeng/splitter';
 import { anaTablo, gridTabloTabler, altTablo } from 'src/assets/arrays';
 import { AltTablo } from './altTablo';
 import { AnaTablo } from './anaTablo';
 import { AnaTabloService } from './anaTabloService';
-
+interface ParamInteface {
+  virtualScroll: boolean;
+}
 @Component({
   selector: 'app-teias',
   templateUrl: './teias.component.html',
   styleUrls: ['./teias.component.css'],
 })
 export class TeiasComponent implements OnInit {
+  @Input() isVirtualScroll: boolean = false;
   anaTablo: AnaTablo[] = [];
+  anaTabloVirtual: AnaTablo[] = [];
   anaTabloLoading: boolean = true;
   anaTabloPage: number = 0;
   anaTabloRows: number = 0;
@@ -28,8 +26,8 @@ export class TeiasComponent implements OnInit {
   anaTabloColumns: any[] = anaTablo;
   gridTabloTabler: any[] = gridTabloTabler;
   container = 500;
-  heightAnaTablo = this.container / 2 - 20 + 'px';
-  heightAltTablo = this.container / 2 - 20 + 'px';
+  heightAnaTablo = this.container / 2 - 30 + 'px';
+  heightAltTablo = this.container / 2 - 30 + 'px';
   y = 100;
   oldY = 0;
   grabber = false;
@@ -44,11 +42,11 @@ export class TeiasComponent implements OnInit {
   mobile: boolean = false;
   constructor(
     private anaTabloService: AnaTabloService,
-    private el: ElementRef,
-    private renderer: Renderer2
+    private el: ElementRef
   ) {}
 
   ngOnInit(): void {
+    console.log('isVirtualScroll', this.isVirtualScroll);
     if (window.screen.width < 1000) {
       this.mobile = true;
       this.visibleSidebar = false;
@@ -56,11 +54,13 @@ export class TeiasComponent implements OnInit {
       this.mobile = false;
       this.visibleSidebar = true;
     }
-    this.filterAnaTablo();
+    this.setHeightAsString();
+    this.anaTabloVirtual = Array.from({ length: 10000 });
+    this.filterAnaTablo({ rows: this.isVirtualScroll && 10000 });
+
     this.anaTabloService
       .getAltTablo({})
       .then((data: any) => (this.altTablo = data.data));
-    this.setHeightAsString();
   }
 
   filterAnaTablo(event?: any) {
@@ -69,6 +69,7 @@ export class TeiasComponent implements OnInit {
       .getAnaTablo({
         ...this.filterElements,
         page: this.anaTabloPage,
+        rows: this.isVirtualScroll && 10000,
         ...event,
       })
       .then((data: any) => {
@@ -76,6 +77,18 @@ export class TeiasComponent implements OnInit {
           this.anaTabloRows = data.total;
           this.anaTablo = data.data;
           this.anaTabloLoading = false;
+          if (this.isVirtualScroll) {
+            console.log('data', data);
+            this.anaTabloVirtual = Array.from({ length: data.total });
+            let loadedCars = this.anaTablo.slice(0, 100);
+            Array.prototype.splice.apply(this.anaTabloVirtual, [
+              0,
+              100,
+              ...loadedCars,
+            ]);
+            //trigger change detection
+            this.anaTabloVirtual = [...this.anaTabloVirtual];
+          }
         }, 150);
       });
   }
@@ -128,28 +141,24 @@ export class TeiasComponent implements OnInit {
     this.anaTabloPage = event.page;
     this.filterAnaTablo();
   }
-  anaTabloLazyLoad(event: any) {
-    console.log('onLayLoadAnaTablo', event);
-    this.anaTabloService
-      .getAnaTablo({
-        ...this.filterElements,
-        page: this.anaTabloPage,
-      })
-      .then((data: any) => {
-        setTimeout(() => {
-          this.anaTabloRows = data.total;
-          this.anaTablo = data.data;
-          this.anaTablo = [...this.anaTablo];
-          this.anaTabloLoading = false;
-        }, 150);
-      });
+  anaTabloLazyLoad(event: LazyLoadEvent) {
+    console.log('event', event);
+    setTimeout(() => {
+      //load data of required page
+      let loadedCars = this.anaTablo.slice(
+        event.first,
+        (event.first || 0) + (event.rows || 0)
+      );
+      Array.prototype.splice.apply(this.anaTabloVirtual, [
+        event.first || 0,
+        event.rows || 0,
+        ...loadedCars,
+      ]);
+      //trigger change detection
+      this.anaTabloVirtual = [...this.anaTabloVirtual];
+    }, Math.random() * 1000);
   }
   splitterResize(event: any) {
     this.setHeightAsString(event.sizes);
-    console.log('splitterResize', event);
-  }
-
-  onGutterTouchMove(event: any) {
-    console.log('onGutterTouchMove', event);
   }
 }
