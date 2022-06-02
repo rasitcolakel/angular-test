@@ -1,0 +1,24 @@
+<div class="grid">
+  <div class="card col-12 lg:col-6">
+    <h5>Toplam Envanter Kayıtları</h5>
+    <p-chart
+      type="line"
+      [data]="basicDataBolge"
+      [options]="basicOptions"
+    ></p-chart>
+  </div>
+
+  <div class="card col-12 lg:col-6">
+    <h5>Mülkiyet</h5>
+    <p-chart
+      type="line"
+      [data]="multiAxisData"
+      [options]="multiAxisOptions"
+    ></p-chart>
+  </div>
+
+  <div class="card col-12 lg:col-6">
+    <h5>Bakım Sorumlusu</h5>
+    <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+  </div>
+</div>

@@ -25,6 +25,7 @@ export class TeiasComponent implements OnInit {
   seciliAnaTablo!: AnaTablo;
   anaTabloColumns: any[] = anaTablo;
   gridTabloTabler: any[] = gridTabloTabler;
+  mainTabs: any[] = ['İşletme', 'Envanter Kaydı'];
   container = 500;
   heightAnaTablo = this.container / 2 - 30 + 'px';
   heightAltTablo = this.container / 2 - 30 + 'px';

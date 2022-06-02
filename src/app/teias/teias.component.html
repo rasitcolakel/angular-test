@@ -33,125 +33,151 @@
       ></app-teias-sidebar>
     </div>
     <div class="col-10 flex flex-column flex-grow-1 h-full">
-      <p-accordion
-        expandIcon="pi pi-fw pi-plus"
-        collapseIcon="pi pi-fw pi-minus"
-        class="mb-2"
-        (onOpen)="accordionMovement($event)"
-        (onClose)="accordionMovement($event)"
-      >
-        <p-accordionTab
-          header="Arama Kriterleri"
-          [selected]="!mobile ? true : false"
+      <p-tabView (onChange)="setHeightAsString()">
+        <p-tabPanel header="İşletme">
+          <app-chart-demo> </app-chart-demo>
+        </p-tabPanel>
+        <p-tabPanel
+          header="Envanter Yönetimi"
+          [closable]="true"
+          [selected]="true"
         >
-          <app-filter-menu
-            (onFilterPressed)="filterData($event)"
-          ></app-filter-menu>
-        </p-accordionTab>
-      </p-accordion>
-      <div class="flex">
-        <p-paginator
-          [hidden]="isVirtualScroll"
-          [rows]="25"
-          _page="2"
-          [slot]="13"
-          [totalRecords]="anaTabloRows"
-          [showJumpToPageDropdown]="true"
-          [showPageLinks]="false"
-          (onPageChange)="onAnaTabloPageChange($event)"
-          #paginator
-        ></p-paginator>
-      </div>
-      <p-splitter
-        [style]="{ height: '100%' }"
-        layout="vertical"
-        class="flex-grow-1 anatablo-container mb-3"
-        (onResizeEnd)="splitterResize($event)"
-        #splitter
-      >
-        <ng-template pTemplate>
-          <div class="overflow-auto">
-            <p-table
-              [value]="isVirtualScroll ? anaTabloVirtual : anaTablo"
-              [scrollable]="true"
-              [scrollHeight]="heightAnaTablo"
-              [resizableColumns]="true"
-              styleClass="p-datatable-gridlines "
-              selectionMode="single"
-              [(selection)]="seciliAnaTablo"
-              (onRowSelect)="anaTabloSec($event)"
-              (onRowUnselect)="anaTabloSecimIptal()"
-              [lazy]="true"
-              [loading]="anaTabloLoading"
-              [virtualScroll]="isVirtualScroll"
-              [rows]="isVirtualScroll ? 50 : 25"
-              (onLazyLoad)="anaTabloLazyLoad($event)"
-              [columns]="anaTabloColumns"
-            >
-              <ng-template pTemplate="header">
-                <tr>
-                  <th pResizableColumn *ngFor="let column of anaTabloColumns">
-                    {{ column.name }}
-                  </th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-data>
-                <tr [pSelectableRow]="data">
-                  <td *ngFor="let column of anaTabloColumns">
-                    {{ data[column.key] }}
-                  </td>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="loadingbody" let-data>
-                <tr [pSelectableRow]="data">
-                  <td *ngFor="let column of anaTabloColumns">
-                    <p-skeleton [ngStyle]="{ width: '100%' }"></p-skeleton>
-                  </td>
-                </tr>
-              </ng-template>
-            </p-table>
-          </div>
-        </ng-template>
-
-        <ng-template pTemplate>
-          <p-tabView
-            [scrollable]="true"
-            class="alt-tablo-tabler"
-            (onChange)="onTabChange($event)"
+          <p-accordion
+            expandIcon="pi pi-fw pi-plus"
+            collapseIcon="pi pi-fw pi-minus"
+            class="mb-2"
+            (onOpen)="accordionMovement($event)"
+            (onClose)="accordionMovement($event)"
           >
-            <p-tabPanel *ngFor="let tab of gridTabloTabler" header="{{ tab }}">
-              <p-table
-                [value]="altTablo"
+            <p-accordionTab
+              header="Arama Kriterleri"
+              [selected]="!mobile ? true : false"
+            >
+              <app-filter-menu
+                (onFilterPressed)="filterData($event)"
+              ></app-filter-menu>
+            </p-accordionTab>
+          </p-accordion>
+          <div class="flex">
+            <p-paginator
+              [hidden]="isVirtualScroll"
+              [rows]="25"
+              _page="2"
+              [slot]="13"
+              [totalRecords]="anaTabloRows"
+              [showJumpToPageDropdown]="true"
+              [showPageLinks]="false"
+              (onPageChange)="onAnaTabloPageChange($event)"
+              #paginator
+            ></p-paginator>
+          </div>
+          <p-splitter
+            [style]="{ height: '100%' }"
+            layout="vertical"
+            class="flex-grow-1 anatablo-container mb-3"
+            (onResizeEnd)="splitterResize($event)"
+            #splitter
+          >
+            <ng-template pTemplate>
+              <div class="overflow-auto">
+                <p-table
+                  [value]="isVirtualScroll ? anaTabloVirtual : anaTablo"
+                  [scrollable]="true"
+                  [scrollHeight]="heightAnaTablo"
+                  [resizableColumns]="true"
+                  styleClass="p-datatable-gridlines "
+                  selectionMode="single"
+                  [(selection)]="seciliAnaTablo"
+                  (onRowSelect)="anaTabloSec($event)"
+                  (onRowUnselect)="anaTabloSecimIptal()"
+                  [lazy]="true"
+                  [loading]="anaTabloLoading"
+                  [virtualScroll]="isVirtualScroll"
+                  [rows]="isVirtualScroll ? 50 : 25"
+                  (onLazyLoad)="anaTabloLazyLoad($event)"
+                  [columns]="anaTabloColumns"
+                >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th
+                        pResizableColumn
+                        *ngFor="let column of anaTabloColumns"
+                      >
+                        {{ column.name }}
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-data>
+                    <tr [pSelectableRow]="data">
+                      <td *ngFor="let column of anaTabloColumns">
+                        {{ data[column.key] }}
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="loadingbody" let-data>
+                    <tr [pSelectableRow]="data">
+                      <td *ngFor="let column of anaTabloColumns">
+                        <p-skeleton [ngStyle]="{ width: '100%' }"></p-skeleton>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </ng-template>
+
+            <ng-template pTemplate>
+              <p-tabView
                 [scrollable]="true"
-                [scrollHeight]="heightAltTablo"
-                [resizableColumns]="true"
-                styleClass="p-datatable-gridlines"
-                class="alt-tablo-table"
-                selectionMode="single"
-                [(selection)]="seciliAltTablo"
-                (onRowSelect)="altTabloSec($event)"
-                (onRowUnselect)="altTabloSecimIptal()"
-                [loading]="altTabloLoading"
+                class="alt-tablo-tabler"
+                (onChange)="onTabChange($event)"
               >
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th pResizableColumn *ngFor="let column of altTabloColumns">
-                      {{ column.name }}
-                    </th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-data>
-                  <tr [pSelectableRow]="data">
-                    <td *ngFor="let column of altTabloColumns">
-                      {{ data[column.key] }}
-                    </td>
-                  </tr>
-                </ng-template>
-              </p-table>
-            </p-tabPanel>
-          </p-tabView>
-        </ng-template>
-      </p-splitter>
+                <p-tabPanel
+                  *ngFor="let tab of gridTabloTabler"
+                  header="{{ tab }}"
+                >
+                  <p-table
+                    [value]="altTablo"
+                    [scrollable]="true"
+                    [scrollHeight]="heightAltTablo"
+                    [resizableColumns]="true"
+                    styleClass="p-datatable-gridlines"
+                    class="alt-tablo-table"
+                    selectionMode="single"
+                    [(selection)]="seciliAltTablo"
+                    (onRowSelect)="altTabloSec($event)"
+                    (onRowUnselect)="altTabloSecimIptal()"
+                    [loading]="altTabloLoading"
+                  >
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th
+                          pResizableColumn
+                          *ngFor="let column of altTabloColumns"
+                        >
+                          {{ column.name }}
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-data>
+                      <tr [pSelectableRow]="data">
+                        <td *ngFor="let column of altTabloColumns">
+                          {{ data[column.key] }}
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </p-tabPanel>
+              </p-tabView>
+            </ng-template>
+          </p-splitter>
+        </p-tabPanel>
+        <p-tabPanel header="Jeneratör" [closable]="true">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta,
+          animi saepe quidem nobis perferendis magnam ipsum veritatis illo atque
+          numquam nostrum, a commodi nihil vel distinctio voluptatibus, eius
+          totam iusto.
+        </p-tabPanel>
+      </p-tabView>
     </div>
   </div>
 </div>

@@ -30,7 +30,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { SplitterModule } from 'primeng/splitter';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { TeiasVirtualComponent } from './teias-virtual/teias-virtual.component';
+import { ChartModule } from 'primeng/chart';
+import { ChartDemoComponent } from './chart-demo/chart-demo.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { TeiasVirtualComponent } from './teias-virtual/teias-virtual.component';
     TeiasComponent,
     TeiasSidebarComponent,
     FilterMenuComponent,
+    ChartDemoComponent,
     routingComponents,
   ],
   imports: [
@@ -65,6 +67,7 @@ import { TeiasVirtualComponent } from './teias-virtual/teias-virtual.component';
     SidebarModule,
     SplitterModule,
     ToolbarModule,
+    ChartModule,
   ],
   providers: [NodeService, AnaTabloService, CdkVirtualScrollViewport],
   bootstrap: [AppComponent],
