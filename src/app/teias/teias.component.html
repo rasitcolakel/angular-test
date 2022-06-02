@@ -114,7 +114,11 @@
         </ng-template>
 
         <ng-template pTemplate>
-          <p-tabView [scrollable]="true" class="alt-tablo-tabler">
+          <p-tabView
+            [scrollable]="true"
+            class="alt-tablo-tabler"
+            (onChange)="onTabChange($event)"
+          >
             <p-tabPanel *ngFor="let tab of gridTabloTabler" header="{{ tab }}">
               <p-table
                 [value]="altTablo"
@@ -127,6 +131,7 @@
                 [(selection)]="seciliAltTablo"
                 (onRowSelect)="altTabloSec($event)"
                 (onRowUnselect)="altTabloSecimIptal()"
+                [loading]="altTabloLoading"
               >
                 <ng-template pTemplate="header">
                   <tr>

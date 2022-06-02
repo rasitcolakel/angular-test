@@ -32,6 +32,7 @@ export class TeiasComponent implements OnInit {
   oldY = 0;
   grabber = false;
   altTablo: AltTablo[] = [];
+  altTabloLoading: boolean = false;
   seciliAltTablo!: AltTablo;
   altTabloColumns: any[] = altTablo;
   @ViewChild('paginator', { static: true })
@@ -57,13 +58,10 @@ export class TeiasComponent implements OnInit {
     this.setHeightAsString();
     this.anaTabloVirtual = Array.from({ length: 10000 });
     this.filterAnaTablo({ rows: this.isVirtualScroll && 10000 });
-
-    this.anaTabloService
-      .getAltTablo({})
-      .then((data: any) => (this.altTablo = data.data));
   }
 
   filterAnaTablo(event?: any) {
+    this.altTablo = [];
     this.anaTabloLoading = true;
     this.anaTabloService
       .getAnaTablo({
@@ -91,6 +89,20 @@ export class TeiasComponent implements OnInit {
           }
         }, 150);
       });
+  }
+  onTabChange(event: any) {
+    this.filterAltTablo(this.seciliAnaTablo);
+  }
+  filterAltTablo(event?: any) {
+    this.altTabloLoading = true;
+    setTimeout(
+      () =>
+        this.anaTabloService.getAltTablo(event).then((data: any) => {
+          this.altTablo = data.data;
+          this.altTabloLoading = false;
+        }),
+      Math.random() * 1000 + 500
+    );
   }
 
   setHeightAsString(sizes?: any) {
@@ -121,6 +133,7 @@ export class TeiasComponent implements OnInit {
 
   anaTabloSec(event: any) {
     this.seciliAnaTablo = event.data;
+    this.filterAltTablo(this.seciliAnaTablo);
   }
   anaTabloSecimIptal() {
     // this.seciliAnaTablo = undefined;
