@@ -1,11 +1,14 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MenuItem } from 'primeng/api';
 import { Paginator } from 'primeng/paginator';
 import { Splitter } from 'primeng/splitter';
 import { anaTablo, gridTabloTabler, altTablo } from 'src/assets/arrays';
 import { AltTablo } from './altTablo';
 import { AnaTablo } from './anaTablo';
 import { AnaTabloService } from './anaTabloService';
+import autoTable, { RowInput } from 'jspdf-autotable';
+import { font } from './font';
+import * as FileSaver from 'file-saver';
 interface ParamInteface {
   virtualScroll: boolean;
 }
@@ -21,6 +24,7 @@ export class TeiasComponent implements OnInit {
   anaTabloLoading: boolean = true;
   anaTabloPage: number = 0;
   anaTabloRows: number = 0;
+  anaTabloSave: MenuItem[] = [];
   filterElements: any;
   seciliAnaTablo!: AnaTablo;
   anaTabloColumns: any[] = anaTablo;
@@ -59,6 +63,23 @@ export class TeiasComponent implements OnInit {
     this.setHeightAsString();
     this.anaTabloVirtual = Array.from({ length: 10000 });
     this.filterAnaTablo({ rows: this.isVirtualScroll && 10000 });
+
+    this.anaTabloSave = [
+      {
+        label: 'PDF',
+        icon: 'pi pi-file-pdf',
+        command: () => {
+          this.exportPdf();
+        },
+      },
+      {
+        label: 'Excel',
+        icon: 'pi pi-file-excel',
+        command: () => {
+          this.exportExcel();
+        },
+      },
+    ];
   }
 
   filterAnaTablo(event?: any) {
@@ -174,5 +195,57 @@ export class TeiasComponent implements OnInit {
   }
   splitterResize(event: any) {
     this.setHeightAsString(event.sizes);
+  }
+  exportPdf() {
+    import('jspdf').then((jsPDF) => {
+      import('jspdf-autotable').then((x) => {
+        const doc = new jsPDF.default('l', 'mm', 'a4');
+
+        doc.addFileToVFS('Roboto-Regular.ttf', font);
+        doc.addFont('Roboto-Regular.ttf', 'Roboto', 'normal');
+        doc.setFont('Roboto');
+        autoTable(doc, {
+          head: [this.anaTabloColumns.slice(0, 5).map((x) => x.name)],
+          body: this.anaTablo.map((x) => [
+            x.trafo_merkezi_id,
+            x.etiket,
+            x.lkp_bolge_mudurluk_qw_?.toLowerCase(),
+            x.lkp_bolge_mudurluk_qw_?.toLowerCase(),
+            x.lkp_sorumlu_ytm_qw_?.toLowerCase(),
+          ]) as RowInput[],
+          styles: {
+            font: 'Roboto',
+            fontStyle: 'normal',
+            fontSize: 9,
+          },
+        });
+        doc.save('kayit_export_' + new Date().getTime() + '.pdf');
+      });
+    });
+  }
+
+  exportExcel() {
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(this.anaTablo);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      this.saveAsExcelFile(excelBuffer, 'kayit');
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
   }
 }

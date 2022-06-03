@@ -58,18 +58,29 @@
               ></app-filter-menu>
             </p-accordionTab>
           </p-accordion>
-          <div class="flex">
-            <p-paginator
-              [hidden]="isVirtualScroll"
-              [rows]="25"
-              _page="2"
-              [slot]="13"
-              [totalRecords]="anaTabloRows"
-              [showJumpToPageDropdown]="true"
-              [showPageLinks]="false"
-              (onPageChange)="onAnaTabloPageChange($event)"
-              #paginator
-            ></p-paginator>
+          <div
+            class="flex grid my-2 align-items-center justify-content-between"
+          >
+            <div>
+              <p-paginator
+                [hidden]="isVirtualScroll"
+                [rows]="25"
+                _page="2"
+                [slot]="13"
+                [totalRecords]="anaTabloRows"
+                [showJumpToPageDropdown]="true"
+                [showPageLinks]="false"
+                (onPageChange)="onAnaTabloPageChange($event)"
+                #paginator
+              ></p-paginator>
+            </div>
+
+            <p-splitButton
+              class="justify-self-end"
+              label="Kaydet"
+              icon="pi pi-download"
+              [model]="anaTabloSave"
+            ></p-splitButton>
           </div>
           <p-splitter
             [style]="{ height: '100%' }"

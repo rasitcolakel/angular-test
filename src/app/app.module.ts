@@ -32,6 +32,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { ChartModule } from 'primeng/chart';
 import { ChartDemoComponent } from './chart-demo/chart-demo.component';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ChartDemoComponent } from './chart-demo/chart-demo.component';
     SplitterModule,
     ToolbarModule,
     ChartModule,
+    SplitButtonModule,
   ],
   providers: [NodeService, AnaTabloService, CdkVirtualScrollViewport],
   bootstrap: [AppComponent],
