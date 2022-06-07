@@ -62,9 +62,9 @@ export class TeiasComponent implements OnInit {
   transformatorModal: boolean = false;
   transformatorModalItem!: AltTablo;
   messageModalItem: MessageModal = {
-    visible: false,
+    visible: true,
     user: '',
-    messages: [],
+    messages: this.randomMessages(),
     message: '',
   };
   @ViewChild('messagescroll', { static: true })
