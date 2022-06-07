@@ -84,3 +84,13 @@ body {
   top: 0 !important;
   right: 0 !important;
 }
+.white-button {
+  color: white !important;
+}
+
+:host tr.p-highlight {
+  background: #26add0 !important;
+}
+:host ::ng-deep .p-dialog-footer {
+  padding: 0 !important;
+}

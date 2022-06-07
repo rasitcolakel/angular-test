@@ -23,3 +23,24 @@ body {
   --tedas-primary: #177aa8;
   --tedas-orange: #e27c55;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e27c55;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #e27c55;
+}

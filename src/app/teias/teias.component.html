@@ -1,13 +1,175 @@
 <div class="container">
+  <p-dialog
+    [(visible)]="transformatorModal && transformatorModalItem"
+    [modal]="true"
+    [baseZIndex]="10000"
+    [draggable]="false"
+    [resizable]="false"
+    [responsive]="true"
+    [maximizable]="mobile"
+    [styleClass]="mobile ? 'w-full' : 'w-5'"
+    header="Trafo Merkezi"
+    *ngIf="transformatorModalItem"
+  >
+    <div>
+      <div class="flex align-items-center mb-4">
+        <span class="text-xl mr-2">Trafo Merkezi:</span>
+        <button pButton type="button" class="p-button-text p-0 m-0 text-xl">
+          {{ transformatorModalItem?.trafo_merkezi_id_qw_ }}
+        </button>
+      </div>
+      <p-divider></p-divider>
+
+      <div class="flex align-items-center">
+        <button
+          pButton
+          type="button"
+          class="p-button-text p-0 m-0 text-md"
+          (click)="showMessageModal(transformatorModalItem.insert_user_id_qw_)"
+        >
+          {{ transformatorModalItem?.insert_user_id_qw_ }}
+        </button>
+        <span class="text-md mr-2">{{
+          transactionDetail(transformatorModalItem.insert_dttm, "insert")
+        }}</span>
+      </div>
+      <p-divider></p-divider>
+
+      <div class="flex align-items-center">
+        <button
+          pButton
+          type="button"
+          class="p-button-text p-0 m-0 text-md"
+          (click)="showMessageModal(transformatorModalItem.version_user_id_qw_)"
+        >
+          {{ transformatorModalItem?.version_user_id_qw_ }}
+        </button>
+        <span class="text-md mr-2">{{
+          transactionDetail(transformatorModalItem.version_dttm, "update")
+        }}</span>
+      </div>
+    </div>
+  </p-dialog>
+  <p-dialog
+    [header]="messageModalItem.user"
+    [(visible)]="messageModalItem.visible"
+    [position]="!mobile ? 'bottom-right' : ''"
+    [styleClass]="mobile ? 'w-full' : 'w-2'"
+    [baseZIndex]="10000"
+    [draggable]="false"
+    [resizable]="false"
+    [maximizable]="mobile"
+    [modal]="mobile"
+    maximized="true"
+  >
+    <p-scrollPanel [style]="{ width: '100%', height: '200px' }" #messagescroll>
+      <div class="grid">
+        <div
+          *ngFor="let message of messageModalItem.messages; let i = index"
+          class="flex col-12"
+          [ngClass]="
+            message.position === 'right'
+              ? 'justify-content-end'
+              : 'justify-content-start'
+          "
+        >
+          <div
+            class="flex p-2 w-auto border-round-sm"
+            [ngClass]="
+              message.position === 'right'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200'
+            "
+          >
+            {{ message.message }}
+          </div>
+        </div>
+      </div>
+    </p-scrollPanel>
+    <ng-template pTemplate="footer">
+      <textarea
+        [rows]="5"
+        class="w-full"
+        pInputTextarea
+        autoResize="autoResize"
+        (keyup)="$event.keyCode == 13 && createMessages($event)"
+        [(ngModel)]="messageModalItem.message"
+      ></textarea>
+    </ng-template>
+  </p-dialog>
   <p-toolbar>
-    <div class="flex align-items-center">
+    <div class="flex align-items-center justify-content-between w-full">
       <img src="assets/logo.png" alt="logo" />
-      <p-button
-        icon="pi pi-bars"
-        class="p-mr-2 pl-2 p-button-outlined"
-        (onClick)="visibleSidebar = !visibleSidebar"
-        *ngIf="mobile"
-      ></p-button>
+      <div>
+        <span class="p-input-icon-left" *ngIf="!mobile">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="Arama" />
+        </span>
+      </div>
+      <div class="flex align-items-center">
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-search"
+          class="p-button-rounded p-button-text white-button"
+          (click)="showSearchModal()"
+          *ngIf="mobile"
+        ></button>
+        <p-dialog
+          [(visible)]="searchModal"
+          [modal]="true"
+          [baseZIndex]="10000"
+          [draggable]="false"
+          [resizable]="false"
+          [responsive]="true"
+          [closable]="false"
+          [showHeader]="false"
+          styleClass="w-full"
+        >
+          <div class="flex align-items-center">
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-search"></i>
+              <input
+                type="text"
+                class="w-full"
+                pInputText
+                placeholder="Arama"
+                (keyup)="$event.keyCode == 13 && hideSearchModal()"
+              />
+            </span>
+
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-times"
+              class="p-button-rounded p-button-danger ml-2"
+              (click)="hideSearchModal()"
+            ></button>
+          </div>
+        </p-dialog>
+
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-bars"
+          class="p-button-rounded p-button-text white-button"
+          (click)="visibleSidebar = !visibleSidebar"
+          *ngIf="mobile"
+        ></button>
+        <p-avatar
+          class="cursor-pointer"
+          pRipple
+          icon="pi pi-user"
+          (click)="menu.toggle($event)"
+          [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
+          [size]="mobile ? 'small' : 'large'"
+          shape="circle"
+        ></p-avatar>
+        <p-menu #menu [popup]="true" [model]="items"></p-menu>
+      </div>
     </div>
   </p-toolbar>
   <div *ngIf="mobile">
@@ -18,15 +180,17 @@
   <div class="grid h-screen m-0">
     <div
       class="flex flex-column"
-      [ngClass]="!mobile && visibleSidebar ? ' col-2' : ''"
+      [ngClass]="!mobile && visibleSidebar ? 'col-2' : 'p-2'"
       *ngIf="!mobile"
     >
-      <p-button
+      <button
+        pButton
+        pRipple
         type="button"
         [icon]="!visibleSidebar ? 'pi pi-chevron-right' : 'pi pi-chevron-left'"
-        class="p-0 m-0 align-self-end ml-2"
-        (onClick)="visibleSidebar = !visibleSidebar"
-      ></p-button>
+        class="p-button-rounded p-button-text p-0 m-0 align-self-end ml-2"
+        (click)="visibleSidebar = !visibleSidebar"
+      ></button>
       <app-teias-sidebar
         class="sidebar"
         *ngIf="!mobile && visibleSidebar"
@@ -76,10 +240,12 @@
             </div>
 
             <p-splitButton
-              class="justify-self-end"
+              class="justify-self-end teias-button"
+              styleClass="teias-button"
               label="Kaydet"
               icon="pi pi-download"
               [model]="anaTabloSave"
+              menuStyleClass="w-12"
             ></p-splitButton>
           </div>
           <p-splitter
@@ -96,7 +262,7 @@
                   [scrollable]="true"
                   [scrollHeight]="heightAnaTablo"
                   [resizableColumns]="true"
-                  styleClass="p-datatable-gridlines "
+                  styleClass="p-datatable-gridlines p-datatable-striped"
                   selectionMode="single"
                   [(selection)]="seciliAnaTablo"
                   (onRowSelect)="anaTabloSec($event)"
@@ -121,7 +287,29 @@
                   <ng-template pTemplate="body" let-data>
                     <tr [pSelectableRow]="data">
                       <td *ngFor="let column of anaTabloColumns">
-                        {{ data[column.key] }}
+                        <button
+                          pButton
+                          type="button"
+                          class="p-button-text p-0 m-0 w-full"
+                          *ngIf="
+                            column.key === 'insert_user_id_qw_' ||
+                            column.key === 'version_user_id_qw_'
+                          "
+                          (click)="showMessageModal(data[column.key])"
+                        >
+                          {{ data[column.key] }}
+                        </button>
+                        <span
+                          *ngIf="
+                            ![
+                              'trafo_merkezi_id_qw_',
+                              'insert_user_id_qw_',
+                              'version_user_id_qw_'
+                            ].includes(column.key)
+                          "
+                        >
+                          {{ data[column.key] }}
+                        </span>
                       </td>
                     </tr>
                   </ng-template>
@@ -151,7 +339,7 @@
                     [scrollable]="true"
                     [scrollHeight]="heightAltTablo"
                     [resizableColumns]="true"
-                    styleClass="p-datatable-gridlines"
+                    styleClass="p-datatable-gridlines p-datatable-striped"
                     class="alt-tablo-table"
                     selectionMode="single"
                     [(selection)]="seciliAltTablo"
@@ -172,7 +360,40 @@
                     <ng-template pTemplate="body" let-data>
                       <tr [pSelectableRow]="data">
                         <td *ngFor="let column of altTabloColumns">
-                          {{ data[column.key] }}
+                          <button
+                            pButton
+                            type="button"
+                            class="p-button-text p-0 m-0 w-full"
+                            *ngIf="column.key === 'trafo_merkezi_id_qw_'"
+                            (click)="showTransformatorModal(data)"
+                          >
+                            {{ data[column.key] }}
+                          </button>
+
+                          <button
+                            pButton
+                            type="button"
+                            class="p-button-text p-0 m-0 w-full"
+                            *ngIf="
+                              column.key === 'insert_user_id_qw_' ||
+                              column.key === 'version_user_id_qw_'
+                            "
+                            (click)="showMessageModal(data[column.key])"
+                          >
+                            {{ data[column.key] }}
+                          </button>
+
+                          <span
+                            *ngIf="
+                              ![
+                                'trafo_merkezi_id_qw_',
+                                'insert_user_id_qw_',
+                                'version_user_id_qw_'
+                              ].includes(column.key)
+                            "
+                          >
+                            {{ data[column.key] }}
+                          </span>
                         </td>
                       </tr>
                     </ng-template>

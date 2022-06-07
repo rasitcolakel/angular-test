@@ -9,9 +9,20 @@ import { AnaTabloService } from './anaTabloService';
 import autoTable, { RowInput } from 'jspdf-autotable';
 import { font } from './font';
 import * as FileSaver from 'file-saver';
-interface ParamInteface {
-  virtualScroll: boolean;
+import { ScrollPanel } from 'primeng/scrollpanel';
+
+interface Message {
+  message: string;
+  position: string;
 }
+
+interface MessageModal {
+  visible: boolean;
+  user: string;
+  messages: Message[];
+  message: string;
+}
+
 @Component({
   selector: 'app-teias',
   templateUrl: './teias.component.html',
@@ -46,12 +57,60 @@ export class TeiasComponent implements OnInit {
   splitter!: Splitter;
   visibleSidebar: boolean = false;
   mobile: boolean = false;
+  items: MenuItem[] = [];
+  searchModal: boolean = false;
+  transformatorModal: boolean = false;
+  transformatorModalItem!: AltTablo;
+  messageModalItem: MessageModal = {
+    visible: false,
+    user: '',
+    messages: [],
+    message: '',
+  };
+  @ViewChild('messagescroll', { static: true })
+  messageScroll!: ScrollPanel;
   constructor(
     private anaTabloService: AnaTabloService,
     private el: ElementRef
   ) {}
 
   ngOnInit(): void {
+    this.items = [
+      {
+        label: 'Bilgilendirme',
+        items: [
+          {
+            label: 'Eğitimler',
+            icon: 'pi pi-book',
+          },
+          {
+            label: 'Bildirimlerim',
+            icon: 'pi pi-bell',
+          },
+          {
+            label: 'E-posta',
+            icon: 'pi pi-envelope',
+          },
+          {
+            label: 'Onaylayacaklarım',
+            icon: 'pi pi-check-circle',
+          },
+        ],
+      },
+      {
+        label: 'Kullanıcı',
+        items: [
+          {
+            label: 'User 1 (@user1)',
+            icon: 'pi pi-user',
+          },
+          {
+            label: 'Çıkış Yap',
+            icon: 'pi pi-sign-out',
+          },
+        ],
+      },
+    ];
     console.log('isVirtualScroll', this.isVirtualScroll);
     if (window.screen.width < 1000) {
       this.mobile = true;
@@ -123,7 +182,7 @@ export class TeiasComponent implements OnInit {
           this.altTablo = data.data;
           this.altTabloLoading = false;
         }),
-      Math.random() * 1000 + 500
+      Math.random() * 100
     );
   }
 
@@ -209,9 +268,9 @@ export class TeiasComponent implements OnInit {
           body: this.anaTablo.map((x) => [
             x.trafo_merkezi_id,
             x.etiket,
-            x.lkp_bolge_mudurluk_qw_?.toLowerCase(),
-            x.lkp_bolge_mudurluk_qw_?.toLowerCase(),
-            x.lkp_sorumlu_ytm_qw_?.toLowerCase(),
+            x.lkp_bolge_mudurluk_qw_,
+            x.lkp_bolge_mudurluk_qw_,
+            x.lkp_sorumlu_ytm_qw_,
           ]) as RowInput[],
           styles: {
             font: 'Roboto',
@@ -247,5 +306,87 @@ export class TeiasComponent implements OnInit {
       data,
       fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
     );
+  }
+
+  showSearchModal() {
+    this.searchModal = true;
+  }
+  hideSearchModal() {
+    this.searchModal = false;
+  }
+  showTransformatorModal(row: any) {
+    this.transformatorModalItem = row;
+    console.log('row', row);
+    this.transformatorModal = true;
+  }
+  hideTransformatorModal() {
+    this.transformatorModal = false;
+  }
+
+  transactionDetail(date: string, type: string): string {
+    return (
+      ' tarafından ' +
+      date +
+      ' ' +
+      (type == 'insert'
+        ? 'tarihinde kayıt yapılmış'
+        : 'tarihinde son kez değiştirilmiş')
+    );
+  }
+  showMessageModal(user: string) {
+    this.messageModalItem = {
+      user: user,
+      visible: true,
+      messages: this.randomMessages(),
+      message: '',
+    };
+    setTimeout(() => {
+      this.messageScroll.scrollTop(15000);
+    }, 100);
+  }
+  hideMessageModal() {
+    this.messageModalItem = {
+      user: '',
+      visible: false,
+      messages: this.randomMessages(),
+      message: '',
+    };
+  }
+  randomMessages() {
+    let messages = [
+      {
+        message: 'Selam',
+        position: 'left',
+      },
+      {
+        message: 'Merhaba',
+        position: 'right',
+      },
+      {
+        message: 'Nasılsınız?',
+        position: 'left',
+      },
+      {
+        message: 'İyiyim teşekkürler. Siz?',
+        position: 'right',
+      },
+      {
+        message: 'Ben de iyiyim teşekkürler.',
+        position: 'left',
+      },
+    ];
+    return messages;
+  }
+
+  createMessages(event: any) {
+    if (event.target.value === '') return;
+    this.messageModalItem.messages.push({
+      message: event.target.value,
+      position: 'right',
+    });
+    this.messageModalItem.message = '';
+    setTimeout(() => {
+      this.messageScroll.scrollTop(15000);
+    }, 100);
   }
 }
