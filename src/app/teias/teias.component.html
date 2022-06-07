@@ -92,7 +92,7 @@
         class="w-full"
         pInputTextarea
         autoResize="autoResize"
-        (keyup)="$event.keyCode == 13 && createMessages($event)"
+        (keypress)="$event.keyCode == 13 && createMessages($event)"
         [(ngModel)]="messageModalItem.message"
       ></textarea>
     </ng-template>
@@ -135,7 +135,7 @@
                 class="w-full"
                 pInputText
                 placeholder="Arama"
-                (keyup)="$event.keyCode == 13 && hideSearchModal()"
+                (keypress)="$event.keyCode == 13 && hideSearchModal()"
               />
             </span>
 
