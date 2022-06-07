@@ -87,14 +87,17 @@
       </div>
     </p-scrollPanel>
     <ng-template pTemplate="footer">
-      <textarea
-        [rows]="5"
-        class="w-full"
-        pInputTextarea
-        autoResize="autoResize"
-        (keypress)="$event.keyCode == 13 && createMessages($event)"
-        [(ngModel)]="messageModalItem.message"
-      ></textarea>
+      <form class="flex align-items-center" (ngSubmit)="createMessages($event)">
+        <input
+          type="text"
+          class="w-full"
+          pInputText
+          name="message"
+          [(ngModel)]="messageModalItem.message"
+          placeholder="Mesajınızı buraya yazınız..."
+          (keyup)="createMessages($event)"
+        />
+      </form>
     </ng-template>
   </p-dialog>
   <p-toolbar>
@@ -127,7 +130,7 @@
           [showHeader]="false"
           styleClass="w-full"
         >
-          <div class="flex align-items-center">
+          <form class="flex align-items-center" (ngSubmit)="hideSearchModal()">
             <span class="p-input-icon-left w-full">
               <i class="pi pi-search"></i>
               <input
@@ -135,10 +138,8 @@
                 class="w-full"
                 pInputText
                 placeholder="Arama"
-                (keypress)="$event.keyCode == 13 && hideSearchModal()"
               />
             </span>
-
             <button
               pButton
               pRipple
@@ -147,7 +148,7 @@
               class="p-button-rounded p-button-danger ml-2"
               (click)="hideSearchModal()"
             ></button>
-          </div>
+          </form>
         </p-dialog>
 
         <button

@@ -379,6 +379,7 @@ export class TeiasComponent implements OnInit {
   }
 
   createMessages(event: any) {
+    if (event.keyCode != 13) return;
     if (event.target.value === '') return;
     this.messageModalItem.messages.push({
       message: event.target.value,
